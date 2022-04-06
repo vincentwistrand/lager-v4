@@ -1,19 +1,40 @@
+import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import saab from './assets/saab.jpg';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Stock from './components/Stock.tsx';
+import Home from "./components/Home";
+import Pick from "./components/Pick";
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+const Tab = createBottomTabNavigator();
+
+const routeIcons = {
+  "Lager": "home",
+  "Plock": "list",
+};
 
 export default function App() {
   return (
-      <View style={styles.base}>
-        <View style={styles.header}>
-          <Text style={{fontSize: 42, marginTop: 43}}>SaabReservdelar</Text>
-        </View>
-        <Image source={saab} style={{ width: 420, height: 240 }} />
+      <NavigationContainer>
+          <Tab.Navigator screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName = routeIcons[route.name] || "alert";
+
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+              tabBarActiveTintColor: 'blue',
+              tabBarInactiveTintColor: 'gray',
+          })}
+          >
+          <Tab.Screen name="Lager" component={Home} options={{headerShown:false, unmountOnBlur: true}}
+        listeners={({navigation}) => ({focus: () => navigation.setParams({screen: "FirstScreenOfSecondScreenStack"})})}/>
+          <Tab.Screen name="Plock" component={Pick} options={{headerShown:false}}/>
+          </Tab.Navigator>
         <StatusBar style="auto" />
-        <Stock/>
-      </View>
+      </NavigationContainer>
+
   );
 }
 
@@ -21,13 +42,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  base: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  header: {
-    height: 100,
-    backgroundColor: '#F0FFF0',
-    alignItems: 'center',
-  }
 });
