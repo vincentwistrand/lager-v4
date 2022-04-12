@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 const routeIcons = {
   "Lager": "home",
   "Plock": "list",
-  "Inleveranser": "list"
+  "Inleveranser": "airplane"
 };
 
 export default function App() {
@@ -28,6 +28,7 @@ export default function App() {
               },
               tabBarActiveTintColor: 'blue',
               tabBarInactiveTintColor: 'gray',
+              tabBarStyle: {backgroundColor: '#FFF'}
           })}
           >
           <Tab.Screen name="Lager" 

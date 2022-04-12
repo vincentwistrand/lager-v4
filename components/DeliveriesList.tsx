@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Button } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Typography, Base } from '../styles/index.js';
 import deliveryModel from "../models/deliveries";
 
@@ -32,12 +33,12 @@ export default function DeliveryList({ route, navigation }) {
         <ScrollView style={Typography.main}>
             <Text style={Typography.h2}>Inleveranser</Text>
             {listOfDeliveries}
-            <Button
-                title="Skapa ny inleverans"
-                onPress={() => {
-                    navigation.navigate('Form');
-                }}
-            />
+            <TouchableOpacity
+                style={Base.loginScreenButton}
+                onPress={() => navigation.navigate('Form')}
+                underlayColor='#fff'>
+                <Text style={Base.loginText}>Skapa ny inleverans</Text>
+            </TouchableOpacity>
             <Text>{"\n"}{"\n"}</Text>
         </ScrollView>
     );

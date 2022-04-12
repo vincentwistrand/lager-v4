@@ -31,5 +31,25 @@ export const deliveryBase = {
   height: 110,
   padding: 10,
   marginBottom: 5,
-  backgroundColor: '#FFF',
+  backgroundColor: '#d9d9d9',
+  borderRadius: 5
+}
+
+export const loginScreenButton = {
+  marginRight:40,
+  marginLeft:40,
+ marginTop:10,
+  paddingTop:10,
+  paddingBottom:10,
+  backgroundColor:'#1E6738',
+  borderRadius:10,
+  borderWidth: 1,
+  borderColor: '#fff'
+}
+
+export const loginText = {
+    color:'#fff',
+    textAlign:'center',
+    paddingLeft : 10,
+    paddingRight : 10
 }
