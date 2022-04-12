@@ -17,10 +17,17 @@ export const h3 = {
     fontWeight: 'bold'
 };
 
-export const h4 = {
+export const h4TopMargin = {
     fontSize: 20,
     marginBottom: 10,
     marginTop: 30,
+    fontWeight: 'bold'
+};
+
+export const h4BottomMargin = {
+    fontSize: 20,
+    marginBottom: 20,
+    marginTop: 0,
     fontWeight: 'bold'
 };
 

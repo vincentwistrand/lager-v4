@@ -1,8 +1,8 @@
 import config from "../config/config.json";
 import Order from "../interface/order";
-import products from "./products";
+import productModel from "./products";
 
-const orders = {
+const orderModel = {
     getOrders: async function getOrders(): Promise<Order[]> {
         const response = await fetch(`${config.base_url}/orders?api_key=${config.api_key}`);
         const result = await response.json();
@@ -17,7 +17,7 @@ const orders = {
             status: 'Packad',
             status_id: 200
         }
-        orders.updateOrder(changedOrders);
+        orderModel.updateOrder(changedOrders);
 
         const orderItems = order.order_items;
         for (let i = 0; i < orderItems.length; i++) {
@@ -27,7 +27,7 @@ const orders = {
                 name: orderItems[i].name,
                 stock: orderItems[i].stock - orderItems[i].amount
             }
-            products.updateProducts(changedStock);
+            productModel.updateProduct(changedStock);
         };
     },
 
@@ -41,10 +41,11 @@ const orders = {
                 },
                 body: JSON.stringify(order)
             });
+            console.log("hanse");
         } catch (error) {
             console.log("Could not update order");
         }
     }
 };
 
-export default orders;
+export default orderModel;

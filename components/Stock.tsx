@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { Typography } from '../styles/index.js';
-import products from "../models/products";
+import productModel from "../models/products";
 
 function StockList() {
   const [allProducts, setProducts] = useState([]);
 
   useEffect(async () => {
-      setProducts(await products.getProducts());
+      setProducts(await productModel.getProducts());
   }, []);
 
   const list = allProducts.map((product, index) => <Text key={index} style={Typography.p}>{ product.name } - { product.stock }st</Text>);

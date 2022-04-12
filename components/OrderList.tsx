@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Button } from "react-native";
 import { Typography } from '../styles/index.js';
-import orders from "../models/orders";
+import orderModel from "../models/orders";
 
 export default function OrderList({ route, navigation }) {
     const { reload } = route.params || true;
@@ -12,11 +12,11 @@ export default function OrderList({ route, navigation }) {
     }
 
     async function reloadOrders() {
-        setAllOrders(await orders.getOrders())
+        setAllOrders(await orderModel.getOrders())
     }
 
     useEffect(async () => {
-        setAllOrders(await orders.getOrders());
+        setAllOrders(await orderModel.getOrders());
     }, []);
 
     const listOfOrders = allOrders

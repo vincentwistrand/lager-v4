@@ -1,5 +1,5 @@
 import { View, Text, Button } from "react-native";
-import orders from "../models/orders.ts";
+import orderModel from "../models/orders.ts";
 import { Typography } from "../styles";
 import OrderItemsInt from "../interface/order_item";
 // import jq from 'jqts';
@@ -8,7 +8,7 @@ export default function PickList({ route, navigation }) {
     const { order } = route.params;
 
     async function pick() {
-        await orders.pickOrder(order);
+        await orderModel.pickOrder(order);
         navigation.navigate("List", { reload: true });
     }
 
@@ -45,7 +45,7 @@ export default function PickList({ route, navigation }) {
             <Text style={Typography.p}>{order.address}</Text>
             <Text style={Typography.p}>{order.zip} {order.city}</Text>
 
-            <Text style={Typography.h4}>Produkter: </Text>
+            <Text style={Typography.h4TopMargin}>Produkter: </Text>
 
             {orderItemsList}
             

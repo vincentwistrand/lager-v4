@@ -26,3 +26,10 @@ export const text = {
 export const button = {
   backgroundColor: '#007AFF'
 }
+
+export const deliveryBase = {
+  height: 110,
+  padding: 10,
+  marginBottom: 5,
+  backgroundColor: '#FFF',
+}
