@@ -37,6 +37,13 @@ export const p = {
     marginBottom: 5,
 };
 
+export const pBold = {
+    fontSize: 17,
+    lineHeight: 20,
+    marginBottom: 5,
+    fontWeight: 'bold'
+};
+
 export const main = {
     padding: 30,
 };

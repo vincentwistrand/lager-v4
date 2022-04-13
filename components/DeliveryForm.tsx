@@ -35,20 +35,20 @@ export default function DeliveryForm({ navigation }) {
         <ScrollView style={{ ...Typography.main }}>
             <Text style={{ ...Typography.h2 }}>Ny inleverans</Text>
 
-            <Text style={{ ...Typography.p }}>Produkt</Text>
+            <Text style={{ ...Typography.pBold }}>Produkt</Text>
             <ProductDropDown
                 delivery={delivery}
                 setDelivery={setDelivery}
                 setCurrentProduct={setCurrentProduct}
             />
 
-            <Text style={{ ...Typography.p }}>Datum</Text>
+            <Text style={{ ...Typography.pBold }}>Datum</Text>
             <DateDropDown
                 delivery={delivery}
                 setDelivery={setDelivery}
             />
 
-            <Text style={{ ...Typography.p }}>Antal</Text>
+            <Text style={{ ...Typography.pBold }}>Antal</Text>
             <TextInput
                 style={{ ...Forms.input }}
                 onChangeText={(content: string) => {
@@ -58,7 +58,7 @@ export default function DeliveryForm({ navigation }) {
                 keyboardType="numeric"
             />
 
-            <Text style={{ ...Typography.p }}>Kommentar</Text>
+            <Text style={{ ...Typography.pBold }}>Kommentar</Text>
             <TextInput
                 style={{ ...Forms.input }}
                 onChangeText={(content: string) => {
