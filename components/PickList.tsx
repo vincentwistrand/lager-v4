@@ -31,7 +31,7 @@ export default function PickList({ route, navigation }) {
         if (inStock) {
             return <TouchableOpacity
                 style={Base.loginScreenButton}
-                onPress={() => navigation.navigate('Pick')}
+                onPress={pick}
                 underlayColor='#fff'>
                 <Text style={Base.loginText}>Plocka order</Text>
             </TouchableOpacity>
