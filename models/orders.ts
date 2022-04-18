@@ -41,7 +41,6 @@ const orderModel = {
                 },
                 body: JSON.stringify(order)
             });
-            console.log("hanse");
         } catch (error) {
             console.log("Could not update order");
         }
