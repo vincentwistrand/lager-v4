@@ -46,4 +46,11 @@ export const pBold = {
 
 export const main = {
     padding: 30,
+    backgroundColor: 'FFF'
+};
+
+export const mainCenter = {
+    padding: 30,
+    alignItems: 'center',
+    backgroundColor: 'FFF'
 };

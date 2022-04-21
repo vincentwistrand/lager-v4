@@ -31,6 +31,17 @@ const orderModel = {
         };
     },
 
+    updateOrderInvoiced: function updateOrderInvoiced(order: Order) {
+        let changedOrders = {
+            id: order.id,
+            name: order.name,
+            api_key: config.api_key,
+            status: 'Fakturerad',
+            status_id: 600
+        }
+        orderModel.updateOrder(changedOrders);
+    },
+
     updateOrder: async function updateOrder(order: Partial<Order>) {
         try {
             await fetch(`${config.base_url}/orders?api_key=${config.api_key}`, {

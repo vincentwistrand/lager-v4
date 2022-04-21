@@ -5,14 +5,14 @@ import { Typography, Base } from '../styles/index.js';
 import deliveryModel from "../models/deliveries";
 
 export default function DeliveryList({ route, navigation }) {
-    const { reload } = route.params || true;
+    const { reload } = route.params || false;
     const [allDeliveries, setAllDeliveries] = useState([]);
 
     if (reload) {
-        reloadOrders();
+        reloadDeliveries();
     }
 
-    async function reloadOrders() {
+    async function reloadDeliveries() {
         setAllDeliveries(await deliveryModel.getDeliveries())
     }
 

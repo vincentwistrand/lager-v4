@@ -17,18 +17,23 @@ export default function DeliveryForm({ navigation }) {
     const [delivery, setDelivery] = useState<Partial<Delivery>>({});
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
+    console.log(delivery);
+
     async function addDelivery(): Promise<void> {
-        await deliveryModel.addDelivery(delivery);
-    
-        const updatedProduct = {
-            ...currentProduct,
-            stock: (currentProduct.stock || 0) + (delivery.amount || 0),
-            api_key: config.api_key
-        };
-    
-        await productModel.updateProduct(updatedProduct);
-    
-        navigation.navigate("List", { reload: true });
+        console.log(delivery.delivery_date);
+        if (delivery.product_id, delivery.amount) {
+            await deliveryModel.addDelivery(delivery);
+            
+            const updatedProduct = {
+                ...currentProduct,
+                stock: (currentProduct.stock || 0) + (delivery.amount || 0),
+                api_key: config.api_key
+            };
+
+            await productModel.updateProduct(updatedProduct);
+
+            navigation.navigate("List", { reload: true });
+        }
     }
 
     return (
@@ -92,6 +97,8 @@ function ProductDropDown(props: { delivery: { product_id: any; }; setDelivery: (
         return <Picker.Item key={index} label={prod.name} value={prod.id} />;
     });
 
+    productsHash[111111] = [];
+
     return (
         <Picker
             selectedValue={props.delivery?.product_id}
@@ -99,6 +106,7 @@ function ProductDropDown(props: { delivery: { product_id: any; }; setDelivery: (
                 props.setDelivery({ ...props.delivery, product_id: itemValue ,api_key: config.api_key });
                 props.setCurrentProduct(productsHash[itemValue]);
             }}>
+            <Picker.Item label='Välj produkt' value="111111"/>
             {itemsList}
         </Picker>
     );
@@ -111,6 +119,14 @@ function DateDropDown(props: { setDelivery: (arg0: any) => void; delivery: any; 
     const showDatePicker = () => {
         setShow(true);
     };
+
+    useEffect(async () => {
+        const date = new Date();
+        props.setDelivery({
+            ...props.delivery,
+            delivery_date: date.toLocaleDateString('se-SV'),
+        });
+    }, []);
 
     return (
         <View>
