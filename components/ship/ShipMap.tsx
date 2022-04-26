@@ -47,10 +47,14 @@ export default function ShipOrder({ route }) {
     return (
         <View style={Base.base}>
             <View style={Typography.main}>
-                <Text style={Typography.h1}>Skicka order</Text>
-                <Text style={Typography.p}>{order.name}</Text>
-                <Text style={Typography.p}>{order.address}</Text>
-                <Text style={Typography.p}>{order.zip} {order.city}</Text>
+                <Text style={Typography.h1}>Leverera order</Text>
+                <Text style={Typography.pBold}>{order.name}</Text>
+                <Text style={Typography.pBold}>{order.address}</Text>
+                <Text style={Typography.pBold}>{order.zip} {order.city}</Text>
+                <Text></Text>
+                <Text style={Typography.p}>Röd markör: leveransaddress</Text>
+                <Text style={Typography.p}>Blå markör: din position</Text>
+                {errorMessage !== null ? <Text style={{color: 'red'}}>{errorMessage}</Text>: null}
             </View>
             <View style={styles.container}>
                 <MapView
