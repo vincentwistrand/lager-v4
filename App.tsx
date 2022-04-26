@@ -1,13 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 //import { SafeAreaView } from 'react-native-safe-area-context';
-import Inventory from "./components/Inventory";
-import Pick from "./components/Pick";
-import Auth from "./components/auth/Auth";
+import Inventory from "./components/inventory/Inventory";
+import Pick from "./components/order/Pick";
+import Auth from "./components/home/Auth";
 import Invoices from "./components/invoice/Invoices";
-import Deliveries from "./components/Deliveries";
+import Deliveries from "./components/delivery/Deliveries";
 import Ship from "./components/ship/Ship";
 import authModel from "./models/auth";
 import { NavigationContainer } from '@react-navigation/native';

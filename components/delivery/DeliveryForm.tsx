@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Base, Typography, Forms } from '../styles/index.js';
-import config from "../config/config.json";
+import { Base, Typography, Forms } from '../../styles/index.js';
+import config from "../../config/config.json";
 
 import { Picker } from '@react-native-picker/picker';
-import productModel from "../models/products";
-import deliveryModel from "../models/deliveries";
+import productModel from "../../models/products";
+import deliveryModel from "../../models/deliveries";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
 
-import Delivery from "../interface/delivery";
-import Product from "../interface/product";
+import Delivery from "../../interface/delivery";
+import Product from "../../interface/product";
 
 export default function DeliveryForm({ navigation }) {
     const [delivery, setDelivery] = useState<Partial<Delivery>>({});

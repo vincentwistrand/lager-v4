@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { Typography } from '../styles/index.js';
-import productModel from "../models/products";
+import { Typography } from '../../styles/index.js';
+import productModel from "../../models/products";
 
 function StockList() {
   const [allProducts, setProducts] = useState([]);

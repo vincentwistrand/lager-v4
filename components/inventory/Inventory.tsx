@@ -1,7 +1,7 @@
 import { Image, Text, View } from 'react-native';
-import { Base } from '../styles/index.js';
+import { Base } from '../../styles/index.js';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import saab from '../assets/saab.jpg';
+import saab from '../../assets/saab.jpg';
 import Stock from './Stock';
 
 export default function Inventory() {

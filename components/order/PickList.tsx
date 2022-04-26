@@ -1,7 +1,7 @@
 import { View, Text, Button } from "react-native";
-import orderModel from "../models/orders";
-import { Typography, Base } from "../styles";
-import OrderItemsInt from "../interface/order_item";
+import orderModel from "../../models/orders";
+import { Typography, Base } from "../../styles";
+import OrderItemsInt from "../../interface/order_item";
 // import jq from 'jqts';
 
 export default function PickList({ route, navigation }) {

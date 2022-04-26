@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Button } from "react-native";
-import { Typography, Base } from '../styles/index.js';
-import deliveryModel from "../models/deliveries";
+import { Typography, Base } from '../../styles/index.js';
+import deliveryModel from "../../models/deliveries";
 
 export default function DeliveryList({ route, navigation }) {
     const { reload } = route.params || false;

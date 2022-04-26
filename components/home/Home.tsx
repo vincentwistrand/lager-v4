@@ -1,8 +1,8 @@
 import { Button, Image, Text, View } from 'react-native';
-import { Typography, Base } from '../styles/index.js';
+import { Typography, Base } from '../../styles/index.js';
 import { useState, useEffect } from 'react';
-import authModel from "../models/auth";
-import saab from '../assets/saab.jpg';
+import authModel from "../../models/auth";
+import saab from '../../assets/saab.jpg';
 import * as Updates from 'expo-updates';
 
 export default function Home(props, route) {
