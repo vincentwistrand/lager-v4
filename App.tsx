@@ -8,6 +8,7 @@ import Pick from "./components/Pick";
 import Auth from "./components/auth/Auth";
 import Invoices from "./components/invoice/Invoices";
 import Deliveries from "./components/Deliveries";
+import Ship from "./components/ship/Ship";
 import authModel from "./models/auth";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,7 +19,9 @@ const routeIcons = {
   "Hem": "home",
   "Lager": "cube",
   "Plock": "list",
-  "Inleveranser": "airplane"
+  "Inleveranser": "airplane",
+  "Fakturor": "document-text",
+  "Leveranser": "map"
 };
 
 export default function App() {
@@ -55,6 +58,9 @@ export default function App() {
                       options={{headerShown:false}} />
           <Tab.Screen name="Inleveranser" 
                       component={Deliveries} 
+                      options={{headerShown:false}} />
+          <Tab.Screen name="Leveranser" 
+                      component={Ship} 
                       options={{headerShown:false}} />
           {isLoggedIn ?
               <Tab.Screen name="Fakturor" 
