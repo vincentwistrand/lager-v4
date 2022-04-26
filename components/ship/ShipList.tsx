@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { View, Text, Button } from "react-native";
 import { Typography } from '../../styles/index.js';
 import orderModel from "../../models/orders";
+import Order from "../../interface/order";
 
 export default function ShipList({ navigation }) {
-    const [allOrders, setAllOrders] = useState([]);
+    const [allOrders, setAllOrders] = useState<Order[]>([]);
 
     useEffect(async () => {
         setAllOrders(await orderModel.getOrders());

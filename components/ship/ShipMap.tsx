@@ -56,10 +56,10 @@ export default function ShipOrder({ route }) {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 56.1612,
-                        longitude: 15.5869,
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.1,
+                        latitude: 56.21,
+                        longitude: 15.5969,
+                        latitudeDelta: 0.5,
+                        longitudeDelta: 0.5,
                     }}>
                     {marker}
                     {locationMarker}
