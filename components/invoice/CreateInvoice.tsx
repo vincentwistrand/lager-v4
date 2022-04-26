@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import { Base, Typography } from '../../styles/index.js';
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { DataTable } from "react-native-paper";
 
 import { Picker } from '@react-native-picker/picker';
@@ -18,7 +17,7 @@ export default function CreateInvoice({ navigation }) {
         if (currentOrder.length != 0) {
             await invoiceModel.addInvoice(currentOrder);
             await orderModel.updateOrderInvoiced(currentOrder);
-            navigation.navigate("ViewInvoices", { reload: true });
+            navigation.navigate("Visa fakturor", { reload: true });
         }
     }
 
@@ -68,14 +67,13 @@ export default function CreateInvoice({ navigation }) {
                 </DataTable.Row>
             </DataTable>
 
-            <TouchableOpacity
-                style={Base.loginScreenButton}
-                onPress={() => { 
-                    createInvoice(currentOrder) 
-                }}
-                underlayColor='#fff'>
-                <Text style={Base.loginText}>Skapa faktura</Text>
-            </TouchableOpacity>
+            {currentOrder.length != 0 ?
+                <Button
+                    title='Skapa faktura'
+                    onPress={() => { 
+                        createInvoice(currentOrder) 
+                    }}
+                />: null}
         </View>
     );
 };

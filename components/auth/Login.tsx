@@ -12,7 +12,7 @@ export default function Login({navigation, setIsLoggedIn}) {
             const result = await AuthModel.login(auth.email, auth.password);
 
             setIsLoggedIn(true);
-            navigation.navigate("Home");
+            navigation.navigate("Home", { reload: true });
         }
     }
 

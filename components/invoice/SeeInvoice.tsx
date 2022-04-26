@@ -1,10 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ScrollView, Text, Button } from "react-native";
-import { DataTable } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Typography, Base } from '../../styles/index.js';
-import invoiceModel from "../../models/invoices";
-import Invoice from "../../interface/invoice";
+import { ScrollView, Text } from "react-native";
+import { Typography } from '../../styles/index.js';
 
 export default function SeeInvoice({ route, navigation }) {
     const { invoice } = route.params;

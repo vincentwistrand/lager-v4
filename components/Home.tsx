@@ -1,6 +1,5 @@
-import { DevSettings, Image, Text, View } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import { Typography, Base } from '../styles/index.js';
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState, useEffect } from 'react';
 import authModel from "../models/auth";
 import saab from '../assets/saab.jpg';
@@ -36,32 +35,26 @@ export default function Home(props, route) {
                 <Text style={Typography.h2}>Välkommen!</Text>
                 {isLoggedIn ? 
                 <Text style={Typography.h3}>Du är inloggad</Text>:
-                <TouchableOpacity
-                    style={Base.loginScreenButton}
+                <Button
+                    title='Logga in'
                     onPress={() => {
                         props.navigation.navigate("Login");
                     }}
-                    underlayColor='#fff'>
-                    <Text style={Base.loginText}>Logga in</Text>
-                </TouchableOpacity>}
+                />}
                 {isLoggedIn ? 
-                    <TouchableOpacity
-                        style={Base.loginScreenButton}
+                    <Button
+                        title='Logga ut'
                         onPress={async () => {
                             await authModel.logout();
                             reloadApp();
                         }}
-                        underlayColor='#fff'>
-                        <Text style={Base.loginText}>Logga ut</Text>
-                    </TouchableOpacity>:
-                    <TouchableOpacity
-                        style={Base.loginScreenButton}
+                    />:
+                    <Button
+                        title='Registrera ny användare'
                         onPress={() => {
                             props.navigation.navigate("Register");
                         }}
-                        underlayColor='#fff'>
-                        <Text style={Base.loginText}>Registrera ny användare</Text>
-                    </TouchableOpacity>}
+                    />}
             </View>
         </View>
     );

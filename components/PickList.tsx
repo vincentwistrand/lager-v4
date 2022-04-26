@@ -1,5 +1,4 @@
 import { View, Text, Button } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import orderModel from "../models/orders";
 import { Typography, Base } from "../styles";
 import OrderItemsInt from "../interface/order_item";
@@ -10,7 +9,7 @@ export default function PickList({ route, navigation }) {
 
     async function pick() {
         await orderModel.pickOrder(order);
-        navigation.navigate("List", { reload: true });
+        navigation.navigate("Plockbara ordrar", { reload: true });
     }
 
     const orderItemsList = order.order_items.map((item, index) => {
@@ -29,12 +28,10 @@ export default function PickList({ route, navigation }) {
             }
         });
         if (inStock) {
-            return <TouchableOpacity
-                style={Base.loginScreenButton}
-                onPress={pick}
-                underlayColor='#fff'>
-                <Text style={Base.loginText}>Plocka order</Text>
-            </TouchableOpacity>
+            return <Button
+            title='Plocka order'
+            onPress={pick}
+        />
         } else {
             return <Text style={Typography.h4BottomMargin}>Finns inte tillräckligt med produkter i lager för att plocka!</Text>
         }

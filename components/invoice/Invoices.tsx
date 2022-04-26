@@ -8,10 +8,10 @@ const Stack = createNativeStackNavigator();
 
 export default function Invoices() {
     return (
-        <Stack.Navigator initialRouteName="ViewInvoices">
-            <Stack.Screen name="ViewInvoices" component={ViewInvoices} />
-            <Stack.Screen name="CreateInvoice" component={CreateInvoice} />
-            <Stack.Screen name="SeeInvoice" component={SeeInvoice} />
+        <Stack.Navigator initialRouteName="Visa fakturor">
+            <Stack.Screen name="Visa fakturor" component={ViewInvoices} />
+            <Stack.Screen name="Skapa faktura" component={CreateInvoice} />
+            <Stack.Screen name="Visa faktura" component={SeeInvoice} />
         </Stack.Navigator>
     );
 }

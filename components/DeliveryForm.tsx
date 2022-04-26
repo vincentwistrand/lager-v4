@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Base, Typography, Forms } from '../styles/index.js';
-import { TouchableOpacity } from "react-native-gesture-handler";
 import config from "../config/config.json";
 
 import { Picker } from '@react-native-picker/picker';
@@ -17,10 +16,9 @@ export default function DeliveryForm({ navigation }) {
     const [delivery, setDelivery] = useState<Partial<Delivery>>({});
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
-    console.log(delivery);
+    console.log(currentProduct);
 
     async function addDelivery(): Promise<void> {
-        console.log(delivery.delivery_date);
         if (delivery.product_id, delivery.amount) {
             await deliveryModel.addDelivery(delivery);
             
@@ -32,7 +30,7 @@ export default function DeliveryForm({ navigation }) {
 
             await productModel.updateProduct(updatedProduct);
 
-            navigation.navigate("List", { reload: true });
+            navigation.navigate("Leveranser", { reload: true });
         }
     }
 
@@ -71,15 +69,13 @@ export default function DeliveryForm({ navigation }) {
                 }}
                 value={delivery?.comment}
             />
-
-            <TouchableOpacity
-                style={Base.loginScreenButton}
-                onPress={() => {
-                    addDelivery();
-                }}
-                underlayColor='#fff'>
-                <Text style={Base.loginText}>Gör inleverans</Text>
-            </TouchableOpacity>
+            {currentProduct.id ?
+                <Button
+                    title='Gör inleverans'
+                    onPress={() => {
+                        addDelivery();
+                    }}
+                />: null}
         </ScrollView>
     );
 };

@@ -43,10 +43,10 @@ const invoiceModel = {
             creation_date: todaysDate,
             due_date: dueDate
         }
-        console.log(invoice);
+        //console.log(invoice);
 
         const token = await storage.readToken();
-        console.log(token.token);
+        //console.log(token.token);
         try {
             const response = await fetch(`${config.base_url}/invoices?api_key=${config.api_key}`, {
                 method: 'post',

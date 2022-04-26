@@ -13,7 +13,7 @@ export default function Register({navigation, setIsLoggedIn}) {
             const result = await AuthModel.register(auth.email, auth.password);
 
             setIsLoggedIn(true);
-            navigation.navigate("Home");
+            navigation.navigate("Home", { reload: true });
         }
     }
 

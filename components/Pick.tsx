@@ -7,9 +7,9 @@ const Stack = createNativeStackNavigator();
 
 export default function Pick() {
     return (
-        <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={OrderList} />
-            <Stack.Screen name="Details" component={PickList} />
+        <Stack.Navigator initialRouteName="Plockbara ordrar">
+            <Stack.Screen name="Plockbara ordrar" component={OrderList} />
+            <Stack.Screen name="Plocka order" component={PickList} />
         </Stack.Navigator>
     );
 }

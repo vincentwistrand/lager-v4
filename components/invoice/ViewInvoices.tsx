@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ScrollView, Text, Button } from "react-native";
+import { ScrollView, Text, StyleSheet, Button } from "react-native";
 import { DataTable } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Typography, Base } from '../../styles/index.js';
+import { Typography } from '../../styles/index.js';
 import invoiceModel from "../../models/invoices";
 import Invoice from "../../interface/invoice";
 
@@ -16,6 +15,7 @@ export default function ViewInvoices({ route, navigation }) {
 
     async function reloadInvoices() {
         setAllInvoices(await invoiceModel.getInvoices())
+        route.params = false;
     }
 
     useEffect(() => {
@@ -25,8 +25,8 @@ export default function ViewInvoices({ route, navigation }) {
     const listOfInvoices = allInvoices
         .map((invoice: Invoice, index) => {
             return <DataTable.Row key={index}>
-                        <DataTable.Cell style={{flex: 11}} onPress={() => navigation.navigate(
-                                            'SeeInvoice', {
+                        <DataTable.Cell style={styles.customer} onPress={() => navigation.navigate(
+                                            'Visa faktura', {
                                             invoice: invoice
                                             })}>{invoice.name}</DataTable.Cell>
                         <DataTable.Cell style={{flex: 2}}>{invoice.total_price}:-</DataTable.Cell>
@@ -43,11 +43,17 @@ export default function ViewInvoices({ route, navigation }) {
                 </DataTable.Header>
                 {listOfInvoices}
             </DataTable>
-            <TouchableOpacity
-                style={Base.loginScreenButton}
-                onPress={() => navigation.navigate('CreateInvoice')}>
-                <Text style={Base.loginText}>Skapa faktura</Text>
-            </TouchableOpacity>
+            <Button
+                title='Skapa faktura'
+                onPress={() => navigation.navigate('Skapa faktura')}
+            />
         </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    customer: {
+        flex: 11,
+        color: 'blue'
+    }
+});
