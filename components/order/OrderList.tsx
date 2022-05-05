@@ -1,38 +1,46 @@
 import { useState, useEffect } from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Typography, Base } from '../../styles/index.js';
 import orderModel from "../../models/orders";
 
-export default function OrderList({ route, navigation }) {
+export default function OrderList({ test_orders=null, route, navigation }) {
     const { reload } = route.params || false;
-    const [allOrders, setAllOrders] = useState([]);
+    const [orders, setOrders] = useState([]);
 
     if (reload) {
         reloadOrders();
     }
 
     async function reloadOrders() {
-        setAllOrders(await orderModel.getOrders())
+        setOrders(await orderModel.getOrders())
         route.params = false;
     }
 
     useEffect(async () => {
-        setAllOrders(await orderModel.getOrders());
+        if (test_orders) {
+            // For testing
+            setOrders(test_orders);
+        } else {
+            // Real orders
+            setOrders(await orderModel.getOrders());
+        }
     }, []);
 
-    const listOfOrders = allOrders
+    const listOfOrders = orders
         .filter(order => order.status === "Ny")
         .map((order, index) => {
             if (order.status_id !== 100) {
                 return
             }
-            return  <Button
-                    title={order.name}
-                    key={index}
-                    onPress={() => navigation.navigate('Plocka order', {
-                        order: order
-                    })}
-                    />
+            return  <TouchableOpacity
+                        style={Base.loginScreenButton}
+                        key={index}
+                        onPress={() => navigation.navigate('Plocka order', {
+                            order: order
+                        })}
+                        >
+                        <Text style={Base.loginText}>{order.name}</Text>
+                    </TouchableOpacity>
         });
 
     return (

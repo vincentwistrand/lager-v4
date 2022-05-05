@@ -9,9 +9,33 @@ const Stack = createNativeStackNavigator();
 export default function Invoices() {
     return (
         <Stack.Navigator initialRouteName="Visa fakturor">
-            <Stack.Screen name="Visa fakturor" component={ViewInvoices} />
-            <Stack.Screen name="Skapa faktura" component={CreateInvoice} />
-            <Stack.Screen name="Visa faktura" component={SeeInvoice} />
+            <Stack.Screen 
+                        name="Visa fakturor" 
+                        component={ViewInvoices}
+                        options={{
+                            headerStyle: {
+                              backgroundColor: '#1E6738',
+                            },
+                            headerTintColor: '#fff'
+                        }} />
+            <Stack.Screen 
+                        name="Skapa faktura" 
+                        component={CreateInvoice}
+                        options={{
+                            headerStyle: {
+                              backgroundColor: '#1E6738',
+                            },
+                            headerTintColor: '#fff'
+                        }} />
+            <Stack.Screen 
+                        name="Visa faktura" 
+                        component={SeeInvoice}
+                        options={{
+                            headerStyle: {
+                              backgroundColor: '#1E6738',
+                            },
+                            headerTintColor: '#fff'
+                        }} />
         </Stack.Navigator>
     );
 }

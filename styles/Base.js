@@ -7,6 +7,11 @@ export const base = {
   backgroundColor: '#FFF',
 }
 
+export const safeView = {
+  flex: 1,
+  backgroundColor: '#1E6738',
+}
+
 export const header = {
   alignItems: 'center',
   backgroundColor: '#FFF',
@@ -17,7 +22,7 @@ export const image = {
   height: 220,
   alignItems: 'center',
 }
-export const text = {
+export const headline = {
   height: 70,
   alignItems: 'center',
   fontSize: 50,

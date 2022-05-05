@@ -1,19 +1,21 @@
-import { Button, Image, Text, View } from 'react-native';
+import { TouchableOpacity, Image, Text, View } from 'react-native';
 import { Typography, Base } from '../../styles/index.js';
 import { useState, useEffect } from 'react';
 import authModel from "../../models/auth";
 import saab from '../../assets/saab.jpg';
 import * as Updates from 'expo-updates';
 
-export default function Home(props, route) {
-    const { reload } = route.params || true;
+export default function Home({ route, navigation }) {
+    const { reload } = route.params || false;
+
     const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
     async function reloadLoggedIn() {
         setIsLoggedIn(await authModel.loggedIn());
+        route.params = false;
     }
 
-    if (true) {
+    if (reload) {
         reloadLoggedIn();
     }
 
@@ -27,34 +29,41 @@ export default function Home(props, route) {
 
     return (
         <View>
+            <View style={{backgroundColor: '#FFF', height: 24}}></View>
             <View style={Base.header}>
-                <Text style={Base.text}>SaabReservdelar</Text>
+                <Text style={Base.headline}>SaabReservdelar</Text>
             </View>
             <Image source={saab} style={Base.image} />
             <View style={Typography.main}>
                 <Text style={Typography.h2}>Välkommen!</Text>
                 {isLoggedIn ? 
                 <Text style={Typography.h3}>Du är inloggad</Text>:
-                <Button
-                    title='Logga in'
+                <TouchableOpacity
+                    style={Base.loginScreenButton}
                     onPress={() => {
-                        props.navigation.navigate("Login");
+                        navigation.navigate("Login");
                     }}
-                />}
+                    >
+                    <Text style={Base.loginText}>Logga in</Text>
+                </TouchableOpacity>}
                 {isLoggedIn ? 
-                    <Button
-                        title='Logga ut'
+                    <TouchableOpacity
+                        style={Base.loginScreenButton}
                         onPress={async () => {
                             await authModel.logout();
                             reloadApp();
                         }}
-                    />:
-                    <Button
-                        title='Registrera ny användare'
+                        >
+                        <Text style={Base.loginText}>Logga ut</Text>
+                    </TouchableOpacity>:
+                    <TouchableOpacity
+                        style={Base.loginScreenButton}
                         onPress={() => {
-                            props.navigation.navigate("Register");
+                            navigation.navigate("Register");
                         }}
-                    />}
+                        >
+                        <Text style={Base.loginText}>Registrera ny användare</Text>
+                    </TouchableOpacity>}
             </View>
         </View>
     );

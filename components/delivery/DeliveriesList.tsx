@@ -1,26 +1,32 @@
 import { useState, useEffect } from 'react';
-import { ScrollView, View, Text, Button } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { Typography, Base } from '../../styles/index.js';
 import deliveryModel from "../../models/deliveries";
 
-export default function DeliveryList({ route, navigation }) {
+export default function DeliveryList({ route, navigation, test_deliveries=null }) {
     const { reload } = route.params || false;
-    const [allDeliveries, setAllDeliveries] = useState([]);
+    const [deliveries, setDeliveries] = useState([]);
 
     if (reload) {
         reloadDeliveries();
     }
 
     async function reloadDeliveries() {
-        setAllDeliveries(await deliveryModel.getDeliveries())
+        setDeliveries(await deliveryModel.getDeliveries())
         route.params = false;
     }
 
     useEffect(async () => {
-        setAllDeliveries(await deliveryModel.getDeliveries());
+        if (test_deliveries) {
+            // For testing
+            setDeliveries(test_deliveries);
+        } else {
+            // Real products
+            setDeliveries(await deliveryModel.getDeliveries());
+        }
     }, []);
     
-    const listOfDeliveries = allDeliveries
+    const listOfDeliveries = deliveries
         .map((delivery, index) => {
             return  <View key={index} style={Base.deliveryBase}>
                         <Text style={Typography.h4BottomMargin}>{delivery.product_name}</Text>
@@ -33,10 +39,13 @@ export default function DeliveryList({ route, navigation }) {
         <ScrollView style={Typography.main}>
             <Text style={Typography.h2}>Inleveranser</Text>
             {listOfDeliveries}
-            <Button
-                title='Skapa ny inleverans'
+            <TouchableOpacity
+                style={Base.loginScreenButton}
                 onPress={() => navigation.navigate('Ny leverans')}
-            />
+                accessibilityLabel="Skapa ny inleverans genom att trycka"
+                >
+                <Text style={Base.loginText}>Skapa ny inleverans</Text>
+            </TouchableOpacity>
             <Text>{"\n"}{"\n"}</Text>
         </ScrollView>
     );

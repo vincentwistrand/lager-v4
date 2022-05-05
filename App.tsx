@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
-//import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect, Fragment } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Inventory from "./components/inventory/Inventory";
 import Pick from "./components/order/Pick";
 import Auth from "./components/home/Auth";
@@ -11,6 +11,8 @@ import Ship from "./components/ship/Ship";
 import authModel from "./models/auth";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FlashMessage from "react-native-flash-message"
+import { Base } from './styles';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,13 +27,15 @@ const routeIcons = {
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
-  console.log(isLoggedIn);
 
   useEffect(async () => {
     setIsLoggedIn(await authModel.loggedIn());
   }, []);
 
   return (
+  <Fragment>
+    <SafeAreaView style={{ flex:0, backgroundColor: '#1E6738' }} />
+    <SafeAreaView style={Base.base}>
       <NavigationContainer>
           <Tab.Navigator screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
@@ -48,6 +52,7 @@ export default function App() {
                       options={{headerShown:false}}>
               {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
           </Tab.Screen>
+          {isLoggedIn ? <Fragment>
           <Tab.Screen name="Lager" 
                       component={Inventory} 
                       options={{headerShown:false, unmountOnBlur: true}}
@@ -61,14 +66,16 @@ export default function App() {
           <Tab.Screen name="Leveranser" 
                       component={Ship} 
                       options={{headerShown:false}} />
-          {isLoggedIn ?
+          
               <Tab.Screen name="Fakturor" 
                           component={Invoices}
-                          options={{headerShown:false}} />: 
-              null}
+                          options={{headerShown:false}} />
+          </Fragment>: null}
           </Tab.Navigator>
-        <StatusBar style="auto" />
       </NavigationContainer>
-
+      <StatusBar style="auto" />
+      <FlashMessage position="top" />
+    </SafeAreaView>
+</Fragment>
   );
 }

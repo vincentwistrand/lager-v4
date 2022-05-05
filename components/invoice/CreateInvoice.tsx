@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, View, Button } from "react-native";
+import { Text, ScrollView, TouchableOpacity } from "react-native";
 import { Base, Typography } from '../../styles/index.js';
 import { DataTable } from "react-native-paper";
 
@@ -28,8 +28,8 @@ export default function CreateInvoice({ navigation }) {
         .map((orderItem: OrderItemsInt, index: number) => {
             sum += orderItem.amount * orderItem.price
             return <DataTable.Row key={index}>
-                    <DataTable.Cell style={{flex: 11}}>{orderItem.name}</DataTable.Cell>
-                    <DataTable.Cell style={{flex: 3}}>{orderItem.amount}</DataTable.Cell>
+                    <DataTable.Cell style={{flex: 12}}>{orderItem.name}</DataTable.Cell>
+                    <DataTable.Cell style={{flex: 4}}>{orderItem.amount}</DataTable.Cell>
                     <DataTable.Cell style={{flex: 4}}>{orderItem.price}:-</DataTable.Cell>
                     <DataTable.Cell style={{flex: 4}}>{orderItem.amount * orderItem.price}:-</DataTable.Cell>
                 </DataTable.Row>
@@ -37,7 +37,7 @@ export default function CreateInvoice({ navigation }) {
     }
 
     return (
-        <View style={{ ...Typography.main }}>
+        <ScrollView style={{ ...Typography.main }}>
             <Text style={{ ...Typography.h2 }}>Skapa Faktura</Text>
 
             <Text style={{ ...Typography.pBold }}>Ordrar</Text>
@@ -53,28 +53,32 @@ export default function CreateInvoice({ navigation }) {
 
             <DataTable>
                 <DataTable.Header style={{textAlign: "center"}}>
-                    <DataTable.Title style={{flex: 11}}>Produkt</DataTable.Title>
-                    <DataTable.Title style={{flex: 3, justifyContent: "left"}} numeric>Antal</DataTable.Title>
-                    <DataTable.Title style={{flex: 4, justifyContent: "left"}} numeric>Pris</DataTable.Title>
-                    <DataTable.Title style={{flex: 4, justifyContent: "left"}} numeric>Totalt</DataTable.Title>
+                    <DataTable.Title style={{flex: 10}}>Produkt</DataTable.Title>
+                    <DataTable.Title style={{flex: 2}} numeric>Antal</DataTable.Title>
+                    <DataTable.Title style={{flex: 3}} numeric>Pris</DataTable.Title>
+                    <DataTable.Title style={{flex: 4, marginRight: 20}} numeric>Totalt</DataTable.Title>
                 </DataTable.Header>
                 {listOfOrders}
                 <DataTable.Row>
-                    <DataTable.Cell style={{flex: 11, justifyContent: "left"}}> </DataTable.Cell>
-                    <DataTable.Cell style={{flex: 3, justifyContent: "left"}}> </DataTable.Cell>
-                    <DataTable.Cell style={{flex: 4, justifyContent: "left"}}> </DataTable.Cell>
-                    <DataTable.Cell style={{flex: 4, justifyContent: "left"}}>{sum}:-</DataTable.Cell>
+                    <DataTable.Cell style={{flex: 11}}> </DataTable.Cell>
+                    <DataTable.Cell style={{flex: 3}}> </DataTable.Cell>
+                    <DataTable.Cell style={{flex: 6}}> </DataTable.Cell>
+                    <DataTable.Cell style={{flex: 4}}>{sum}:-</DataTable.Cell>
                 </DataTable.Row>
             </DataTable>
+            <Text></Text>
 
             {currentOrder.length != 0 ?
-                <Button
-                    title='Skapa faktura'
-                    onPress={() => { 
-                        createInvoice(currentOrder) 
-                    }}
-                />: null}
-        </View>
+                <TouchableOpacity
+                        style={Base.loginScreenButton}
+                        onPress={() => { 
+                            createInvoice(currentOrder) 
+                        }}
+                    >
+                    <Text style={Base.loginText}>Skapa faktura</Text>
+                </TouchableOpacity>: null}
+            <Text>{'\n\n'}</Text>
+        </ScrollView>
     );
 };
 

@@ -1,8 +1,7 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, TouchableOpacity } from "react-native";
 import orderModel from "../../models/orders";
 import { Typography, Base } from "../../styles";
 import OrderItemsInt from "../../interface/order_item";
-// import jq from 'jqts';
 
 export default function PickList({ route, navigation }) {
     const { order } = route.params;
@@ -28,19 +27,17 @@ export default function PickList({ route, navigation }) {
             }
         });
         if (inStock) {
-            return <Button
-            title='Plocka order'
-            onPress={pick}
-        />
+            return  <TouchableOpacity
+                        style={Base.loginScreenButton}
+                        onPress={pick}
+                        accessibilityLabel="Plocka order genom att trycka"
+                        >
+                        <Text style={Base.loginText}>Plocka order</Text>
+                    </TouchableOpacity>
         } else {
             return <Text style={Typography.h4BottomMargin}>Finns inte tillräckligt med produkter i lager för att plocka!</Text>
         }
     }
-
-    // const findAmount = jq.compile('[.order_items[].amount]');
-    // const findStock = jq.compile('[.order_items[].stock]');
-    // const amount = findAmount.evaluate(order);
-    // const stock = findStock.evaluate(order);
 
     return (
         <View style={Typography.main}>

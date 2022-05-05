@@ -1,8 +1,7 @@
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { Typography, Forms, Base } from '../../styles';
 
 export default function AuthFields({ auth, setAuth, title, submit, navigation}) {
-    console.log(title);
     return (
         <View style={{ ...Typography.main }}>
             <Text style={Typography.h2}>{title}</Text>
@@ -15,6 +14,8 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
                 }}
                 value={auth?.email}
                 keyboardType="email-address"
+                autoCapitalize="none"
+                testID="email-field"
             />
 
             <Text style={Typography.p}>Lösenord</Text>
@@ -25,27 +26,37 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
                 }}
                 value={auth?.password}
                 secureTextEntry={true}
+                testID="password-field"
             />
 
             {title === "Registrera" && 
-                <Button
-                    title='Registrera'
+                <TouchableOpacity
+                    style={Base.loginScreenButton}
                     onPress={() => submit()}
-                />}
+                    accessibilityLabel={`${title} genom att trycka`}
+                    >
+                    <Text style={Base.loginText}>Registrera</Text>
+                </TouchableOpacity>}
 
             {title === "Logga in" &&
-                <Button
-                    title='Logga in'
+                <TouchableOpacity
+                    style={Base.loginScreenButton}
                     onPress={() => submit()}
-                />}
+                    accessibilityLabel={`${title} genom att trycka`}
+                    >
+                    <Text style={Base.loginText}>Logga in</Text>
+                </TouchableOpacity>}
             
             {title === "Logga in" &&
-                <Button
-                    title='Registrera ny användare'
+                <TouchableOpacity
+                    style={Base.loginScreenButton}
                     onPress={() => {
                         navigation.navigate("Register");
                     }}
-                />}
+                    accessibilityLabel={`${title} genom att trycka`}
+                    >
+                    <Text style={Base.loginText}>Registrera ny användare</Text>
+                </TouchableOpacity>}
         </View>
     );
 };

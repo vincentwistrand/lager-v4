@@ -8,8 +8,24 @@ const Stack = createNativeStackNavigator();
 export default function Ship() {
     return (
         <Stack.Navigator initialRouteName="Leverans">
-            <Stack.Screen name="Leverans" component={ShipList} />
-            <Stack.Screen name="Karta" component={ShipMap} />
+            <Stack.Screen 
+                        name="Leverans" 
+                        component={ShipList}
+                        options={{
+                            headerStyle: {
+                              backgroundColor: '#1E6738',
+                            },
+                            headerTintColor: '#fff'
+                        }} />
+            <Stack.Screen 
+                        name="Karta" 
+                        component={ShipMap}
+                        options={{
+                            headerStyle: {
+                              backgroundColor: '#1E6738',
+                            },
+                            headerTintColor: '#fff'
+                        }} />
         </Stack.Navigator>
     );
 };

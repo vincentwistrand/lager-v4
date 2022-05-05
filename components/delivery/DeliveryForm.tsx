@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Base, Typography, Forms } from '../../styles/index.js';
 import config from "../../config/config.json";
+import { showMessage } from "react-native-flash-message";
 
 import { Picker } from '@react-native-picker/picker';
 import productModel from "../../models/products";
 import deliveryModel from "../../models/deliveries";
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Platform, ScrollView, Text, TextInput, Button, View } from "react-native";
+import { Platform, ScrollView, Text, TextInput, Button, View, TouchableOpacity } from "react-native";
 
 import Delivery from "../../interface/delivery";
 import Product from "../../interface/product";
@@ -16,11 +17,34 @@ export default function DeliveryForm({ navigation }) {
     const [delivery, setDelivery] = useState<Partial<Delivery>>({});
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
-    console.log(currentProduct);
-
     async function addDelivery(): Promise<void> {
         if (delivery.product_id, delivery.amount) {
-            await deliveryModel.addDelivery(delivery);
+
+            if (isNaN(delivery.amount)) {
+                showMessage({
+                    message: "Fel format",
+                    description: "Antal måste vara siffror",
+                    type: "warning",
+                });
+                return;
+            }
+
+            if (Object.keys(currentProduct).length === 0) {
+                showMessage({
+                    message: "Saknas",
+                    description: "Ingen produkt vald!",
+                    type: "warning",
+                });
+                return;
+            }
+
+            const result = await deliveryModel.addDelivery(delivery);
+
+            showMessage({
+                message: "Leverans tillagd:",
+                description: result.amount + " st " + result.product_name,
+                type: "success",
+            });
             
             const updatedProduct = {
                 ...currentProduct,
@@ -31,6 +55,26 @@ export default function DeliveryForm({ navigation }) {
             await productModel.updateProduct(updatedProduct);
 
             navigation.navigate("Leveranser", { reload: true });
+        } else {
+            if (!delivery.product_id || Object.keys(currentProduct).length === 0) {
+                showMessage({
+                    message: "Saknas",
+                    description: "Ingen produkt vald!",
+                    type: "warning",
+                });
+            } else if (isNaN(delivery.amount)) {
+                showMessage({
+                    message: "Fel format",
+                    description: "Antal måste vara siffror",
+                    type: "warning",
+                });
+            } else if (!delivery.amount) {
+                showMessage({
+                    message: "Saknas",
+                    description: "Antal måste fyllas i!",
+                    type: "warning",
+                });
+            }
         }
     }
 
@@ -69,13 +113,14 @@ export default function DeliveryForm({ navigation }) {
                 }}
                 value={delivery?.comment}
             />
-            {currentProduct.id ?
-                <Button
-                    title='Gör inleverans'
+                <TouchableOpacity
+                    style={Base.loginScreenButton}
                     onPress={() => {
                         addDelivery();
                     }}
-                />: null}
+                    >
+                    <Text style={Base.loginText}>Gör inleverans</Text>
+                </TouchableOpacity>
         </ScrollView>
     );
 };

@@ -1,35 +1,35 @@
 import { useState, useEffect } from 'react';
-import { ScrollView, Text, StyleSheet, Button } from "react-native";
+import { ScrollView, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { DataTable } from "react-native-paper";
-import { Typography } from '../../styles/index.js';
+import { Typography, Base } from '../../styles/index.js';
 import invoiceModel from "../../models/invoices";
 import Invoice from "../../interface/invoice";
 
-export default function ViewInvoices({ route, navigation }) {
+export default function ViewInvoices({ route, navigation, test_invoices=null, setAllInvoices=null }) {
     const { reload } = route.params || false;
-    const [allInvoices, setAllInvoices] = useState([]);
+    const [invoices, setInvoices] = useState([]);
 
     if (reload) {
         reloadInvoices();
     }
 
     async function reloadInvoices() {
-        setAllInvoices(await invoiceModel.getInvoices())
+        setInvoices(await invoiceModel.getInvoices());
         route.params = false;
     }
 
-    useEffect(() => {
-        reloadInvoices();
+    useEffect(async () => {
+        setInvoices(await invoiceModel.getInvoices());
     }, []);
 
-    const listOfInvoices = allInvoices
+    const listOfInvoices = invoices
         .map((invoice: Invoice, index) => {
             return <DataTable.Row key={index}>
                         <DataTable.Cell style={styles.customer} onPress={() => navigation.navigate(
                                             'Visa faktura', {
                                             invoice: invoice
                                             })}>{invoice.name}</DataTable.Cell>
-                        <DataTable.Cell style={{flex: 2}}>{invoice.total_price}:-</DataTable.Cell>
+                        <DataTable.Cell style={{flex: 2.5}}>{invoice.total_price}:-</DataTable.Cell>
                     </DataTable.Row>
         });
 
@@ -43,10 +43,12 @@ export default function ViewInvoices({ route, navigation }) {
                 </DataTable.Header>
                 {listOfInvoices}
             </DataTable>
-            <Button
-                title='Skapa faktura'
+            <TouchableOpacity
+                style={Base.loginScreenButton}
                 onPress={() => navigation.navigate('Skapa faktura')}
-            />
+                >
+                <Text style={Base.loginText}>Skapa faktura</Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 }
