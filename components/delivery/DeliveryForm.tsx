@@ -62,16 +62,16 @@ export default function DeliveryForm({ navigation }) {
                     description: "Ingen produkt vald!",
                     type: "warning",
                 });
-            } else if (isNaN(delivery.amount)) {
-                showMessage({
-                    message: "Fel format",
-                    description: "Antal måste vara siffror",
-                    type: "warning",
-                });
             } else if (!delivery.amount) {
                 showMessage({
                     message: "Saknas",
                     description: "Antal måste fyllas i!",
+                    type: "warning",
+                });
+            }else if (isNaN(delivery.amount)) {
+                showMessage({
+                    message: "Fel format",
+                    description: "Antal måste vara siffror",
                     type: "warning",
                 });
             }
